@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Duck Hunt</title>
+
+    <style>
+      
+      html {
+        width: 100%;
+        height: 100%;
+      }
+      
+      body {
+        border: 10px solid #424242;
+        margin: 0;
+        padding: 0;
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);        
+      }
+
+      #input-area {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="input-area">
+
+    </div>
+    <script src="jquery-1.11.2.min.js"></script>
+    <script src="jquery-migrate-1.2.1.min.js"></script>
+    <script>
+      var ip = prompt("Enter your IP address", "10.17.0.0"),
+	  port = prompt("Enter the game port", 4242);
+
+      $('#input-area').click(function(e) {
+        $.ajax({
+          url: "/on_click",
+          method: "POST", 
+          data: {
+            ip: ip,
+            port: port,
+            x: e.offsetX / $('#input-area').width(),
+            y: e.offsetY / $(this).height()
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
